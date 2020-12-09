@@ -30,7 +30,6 @@ const {
     getLocationData,
     images,
     resep,
-    rugapoi,
     rugaapi,
     cariKasar
 } = require('./lib')
@@ -728,22 +727,6 @@ module.exports = HandleMsg = async (aruga, message) => {
             const cariresep = body.slice(7)
             const hasilresep = await resep.resep(cariresep)
             await aruga.reply(from, hasilresep + '\n\nIni kak resep makanannya..', id)
-            .catch(() => {
-                aruga.reply(from, 'Ada yang Error!', id)
-            })
-            break
-        case 'nekopoi':
-             rugapoi.getLatest()
-            .then((result) => {
-                rugapoi.getVideo(result.link)
-                .then((res) => {
-                    let heheq = '\n'
-                    for (let i = 0; i < res.links.length; i++) {
-                        heheq += `${res.links[i]}\n`
-                    }
-                    aruga.reply(from, `Title: ${res.title}\n\nLink:\n${heheq}\nmasih tester bntr :v`)
-                })
-            })
             .catch(() => {
                 aruga.reply(from, 'Ada yang Error!', id)
             })
